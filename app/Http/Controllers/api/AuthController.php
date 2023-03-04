@@ -35,6 +35,8 @@ class AuthController extends Controller
                     'access_token' => $user->createToken(config('app.jwt_secret'))->plainTextToken
                 ], 'User login successfully.');
             }
+
+            return CustomResponse::badRequest(null, 'your credential is wrong !');
         } catch (\Throwable $th) {
             return CustomResponse::error($th->getMessage());
         }

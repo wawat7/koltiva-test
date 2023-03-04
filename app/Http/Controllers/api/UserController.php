@@ -93,7 +93,8 @@ class UserController extends Controller
                 unset($user['password']);
             }
 
-            return CustomResponse::success($this->userService->update($user, $id), 'Success Update Data');
+            $this->userService->update($user, $id);
+            return CustomResponse::success(null, 'Success Update Data');
         } catch (\Throwable $th) {
             return CustomResponse::error($th->getMessage());
         }

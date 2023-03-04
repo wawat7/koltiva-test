@@ -25,10 +25,10 @@ Route::controller(AuthController::class)->group(function() {
     Route::post('login', 'login');
 });
 
-Route::controller(UserController::class)->group(function() {
+Route::middleware('auth:sanctum')->controller(UserController::class)->group(function() {
     Route::get('/users', 'all');
     Route::get('/users/{id}', 'findOne');
     Route::post('/users', 'create');
     Route::put('/users/{id}', 'update');
-    Route::delete('/users', 'delete');
+    Route::delete('/users/{id}', 'delete');
 });

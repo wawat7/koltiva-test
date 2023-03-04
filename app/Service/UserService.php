@@ -2,16 +2,19 @@
 
 namespace App\Service;
 
+use App\Models\User;
 use App\Repository\UserRepository;
 
 class UserService
 {
-    public $repository;
 
+    public $repository;
+    public $imageService;
 
     public function __construct()
     {
         $this->repository = new UserRepository;
+        $this->imageService = new ImageService;
     }
 
     public function create(array $data)
@@ -34,8 +37,10 @@ class UserService
         return $this->repository->update($data, $id);
     }
 
-    public function delete(int $id)
+    public function delete(User $user)
     {
-        return $this->repository->delete($id);
+        //remove image
+        $this->imageService->removeImage(public_path('storage/images/' . $user->foto));
+        return $this->repository->delete($user->id);
     }
 }

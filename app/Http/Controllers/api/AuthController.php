@@ -26,6 +26,65 @@ class AuthController extends Controller
         $this->imageService = new ImageService;
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/login",
+     *     operationId="loginUser",
+     *     tags={"Authentication"},
+     *     summary="Login User",
+     *     description="Login user with email and password",
+     *     @OA\RequestBody(
+     *         description="Login object",
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     format="email",
+     *                     example="wawatprigala00@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                     format="password",
+     *                     example="password"
+     *                 ),
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Login Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="status",
+     *                     type="string",
+     *                     example="success"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="data",
+     *                     type="object",
+     *                     @OA\Property(
+     *                         property="access_token",
+     *                         type="string",
+     *                         example="token_user"
+     *                     ),
+     *                 ),
+     *                 @OA\Property(
+     *                     property="message",
+     *                     type="string",
+     *                     example="User login successfully"
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     * )
+     */
+
     public function login(LoginRequest $request)
     {
         try {
@@ -42,6 +101,69 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/register",
+     *     operationId="registerUser",
+     *     tags={"Authentication"},
+     *     summary="Register User",
+     *     description="Register User",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="User data and profile picture",
+     *         @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="name",
+     *                     type="string",
+     *                     example="Wawat Prigala"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="email",
+     *                     type="string",
+     *                     format="email",
+     *                     example="wawatprigala00@gmail.com"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="password",
+     *                     type="string",
+     *                     format="password",
+     *                     example="password"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="foto",
+     *                     type="string",
+     *                     format="binary"
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Login Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     property="status",
+     *                     type="string",
+     *                     example="success"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="data",
+     *                     type="object",
+     *                 ),
+     *                 @OA\Property(
+     *                     property="message",
+     *                     type="string",
+     *                     example="Registration Successfully"
+     *                 ),
+     *             ),
+     *         ),
+     *     ),
+     * )
+     */
     public function register(RegisterRequest $request)
     {
         try {

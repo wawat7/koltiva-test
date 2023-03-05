@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\api\user;
 
+use App\Rules\ValidBase64Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -26,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . $userId,
             'password' => 'string|min:3',
-            'foto' => 'string|min:10'
+            'foto' => ['string', new ValidBase64Rule]
         ];
     }
 }

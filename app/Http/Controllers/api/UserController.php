@@ -155,7 +155,7 @@ class UserController extends Controller
      *                 @OA\Property(
      *                     property="foto",
      *                     type="string",
-     *                     example="base64 image"
+     *                     example="base64_image"
      *                 ),
      *             ),
      *         ),
@@ -205,8 +205,8 @@ class UserController extends Controller
     }
 
     /**
-     * @OA\Post(
-     *     path="/api/users/{id}?_method=PUT",
+     * @OA\Put(
+     *     path="/api/users/{id}",
      *     summary="Update user",
      *     description="Update user",
      *     operationId="updateUser",
@@ -222,7 +222,7 @@ class UserController extends Controller
      *         required=true,
      *         description="User data",
      *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
+     *             mediaType="application/json",
      *             @OA\Schema(
      *                 @OA\Property(
      *                     property="name",
@@ -244,7 +244,7 @@ class UserController extends Controller
      *                 @OA\Property(
      *                     property="foto",
      *                     type="string",
-     *                     format="binary"
+     *                     example="base64_image"
      *                 ),
      *             ),
      *         ),
@@ -319,8 +319,8 @@ class UserController extends Controller
 
 
     /**
-     * @OA\Post(
-     *     path="/api/users/{id}?_method=Delete",
+     * @OA\Delete(
+     *     path="/api/users/{id}",
      *     summary="Delete user",
      *     description="Delete user",
      *     operationId="deleteUser",

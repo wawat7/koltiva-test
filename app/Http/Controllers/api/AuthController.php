@@ -112,7 +112,7 @@ class AuthController extends Controller
      *         required=true,
      *         description="User data and profile picture",
      *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
+     *             mediaType="application/json",
      *             @OA\Schema(
      *                 @OA\Property(
      *                     property="name",
@@ -134,7 +134,7 @@ class AuthController extends Controller
      *                 @OA\Property(
      *                     property="foto",
      *                     type="string",
-     *                     format="binary"
+     *                     example="base64_image"
      *                 ),
      *             ),
      *         ),

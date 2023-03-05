@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\api\user;
 
+use App\Rules\ValidBase64Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserRequest extends FormRequest
@@ -25,7 +26,7 @@ class CreateUserRequest extends FormRequest
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:3',
-            'foto' => 'required|string|min:10'
+            'foto' => ['string', new ValidBase64Rule]
         ];
     }
 }

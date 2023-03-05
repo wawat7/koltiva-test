@@ -81,7 +81,7 @@
                     "description": "User data and profile picture",
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "properties": {
                                     "name": {
@@ -100,7 +100,7 @@
                                     },
                                     "foto": {
                                         "type": "string",
-                                        "format": "binary"
+                                        "example": "base64_image"
                                     }
                                 },
                                 "type": "object"
@@ -205,7 +205,7 @@
                                     },
                                     "foto": {
                                         "type": "string",
-                                        "example": "base64 image"
+                                        "example": "base64_image"
                                     }
                                 },
                                 "type": "object"
@@ -291,10 +291,8 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/users/{id}?_method=PUT": {
-            "post": {
+            },
+            "put": {
                 "tags": [
                     "Users"
                 ],
@@ -313,7 +311,7 @@
                     "description": "User data",
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "properties": {
                                     "name": {
@@ -332,7 +330,7 @@
                                     },
                                     "foto": {
                                         "type": "string",
-                                        "format": "binary"
+                                        "example": "base64_image"
                                     }
                                 },
                                 "type": "object"
@@ -370,10 +368,8 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/users/{id}?_method=Delete": {
-            "post": {
+            },
+            "delete": {
                 "tags": [
                     "Users"
                 ],

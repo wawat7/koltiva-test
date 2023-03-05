@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Helper\CustomResponse;
+use App\Helper\Utility;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\user\CreateUserRequest;
 use App\Http\Requests\api\user\UpdateUserRequest;
@@ -15,11 +16,13 @@ class UserController extends Controller
 
     public $userService;
     public $imageService;
+    public $utils;
 
     public function __construct()
     {
         $this->userService = new UserService;
         $this->imageService = new ImageService;
+        $this->utils = new Utility;
     }
 
     /**
@@ -60,7 +63,7 @@ class UserController extends Controller
     public function all()
     {
         try {
-            return CustomResponse::success($this->userService->all(), 'Success Get Data');
+            return CustomResponse::success($this->userService->allWithPagination(), 'Success Get Data');
         } catch (\Throwable $th) {
             return CustomResponse::error($th->getMessage());
         }
@@ -130,7 +133,7 @@ class UserController extends Controller
      *         required=true,
      *         description="User data",
      *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
+     *             mediaType="application/json",
      *             @OA\Schema(
      *                 @OA\Property(
      *                     property="name",
@@ -152,7 +155,7 @@ class UserController extends Controller
      *                 @OA\Property(
      *                     property="foto",
      *                     type="string",
-     *                     format="binary"
+     *                     example="base64 image"
      *                 ),
      *             ),
      *         ),
@@ -185,7 +188,7 @@ class UserController extends Controller
     public function create(CreateUserRequest $request)
     {
         try {
-            $image = $request->file('foto');
+            $image = $this->utils->base64ToFile($request->foto);
             $imageName = $this->imageService->saveImage($image);
 
             $user = $this->userService->create([
@@ -281,7 +284,10 @@ class UserController extends Controller
 
             $imageName = '';
             if ($request->has('foto')) {
-                $image = $request->file('foto');
+                //remove foto
+                $this->imageService->removeImage(public_path('storage/images/' . $user->foto));
+
+                $image = $this->utils->base64ToFile($request->foto);
                 $imageName = $this->imageService->saveImage($image);
             }
 

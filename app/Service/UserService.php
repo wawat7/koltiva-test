@@ -32,6 +32,11 @@ class UserService
         return $this->repository->all();
     }
 
+    public function allWithPagination()
+    {
+        return $this->repository->allWithPagination();
+    }
+
     public function update(array $data, int $id)
     {
         return $this->repository->update($data, $id);

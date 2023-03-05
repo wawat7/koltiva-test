@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|string|min:3',
             'email' => 'required|email|unique:users,email,' . $userId,
             'password' => 'string|min:3',
-            'foto' => 'image|mimes:png,jpg|max:5000'
+            'foto' => 'string|min:10'
         ];
     }
 }

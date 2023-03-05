@@ -167,7 +167,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         try {
-            $image = $request->file('foto');
+            $image = $this->utils->base64ToFile($request->foto);
             $imageName = $this->imageService->saveImage($image);
 
             $user = $this->userService->create([
@@ -178,6 +178,18 @@ class AuthController extends Controller
             ]);
 
             return CustomResponse::success($user, 'Registration Successfully');
+        } catch (\Throwable $th) {
+            return CustomResponse::error($th->getMessage());
+        }
+    }
+
+
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->tokens()->delete();
+            return CustomResponse::success(null, 'You have been logged out successfully.');
+
         } catch (\Throwable $th) {
             return CustomResponse::error($th->getMessage());
         }

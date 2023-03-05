@@ -186,7 +186,7 @@
                     "description": "User data",
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "properties": {
                                     "name": {
@@ -205,7 +205,7 @@
                                     },
                                     "foto": {
                                         "type": "string",
-                                        "format": "binary"
+                                        "example": "base64 image"
                                     }
                                 },
                                 "type": "object"

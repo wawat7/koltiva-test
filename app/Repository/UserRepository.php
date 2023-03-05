@@ -21,6 +21,11 @@ class UserRepository
         return User::all();
     }
 
+    public function allWithPagination()
+    {
+        return User::paginate(10);
+    }
+
     public function update(array $data, int $id)
     {
         return User::whereId($id)->update($data);

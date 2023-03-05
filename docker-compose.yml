@@ -15,7 +15,7 @@ services:
       - '8000:9000'
     working_dir: /app
     command: >
-      sh -c "php artisan migrate && php -S 0.0.0.0:9000 -t public"
+      sh -c "php artisan migrate && php artisan storage:link && php -S 0.0.0.0:9000 -t public"
     environment:
       APP_ENV: ${APP_ENV}
       APP_DEBUG: ${APP_DEBUG}
